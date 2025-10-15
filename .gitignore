@@ -1,0 +1,42 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# OS / Editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+.clinerules/
+memory-bank/
+docs/
+
+# Env and secrets
+.env
+.env.local
+.env.*.local
+
+# Caches / logs
+*.log
+.cache/
+.python_cache/
+.mypy_cache/
+pytest_cache/
+
+# Node/Streamlit caches
+ui/.streamlit/
+.streamlit/
+
+# Docker
+*.pid
