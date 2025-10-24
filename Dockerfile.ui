@@ -1,0 +1,21 @@
+# Streamlit UI image
+FROM python:3.11-slim-bookworm
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app
+
+# Install UI-specific Python deps only
+COPY requirements-ui.txt /app/requirements-ui.txt
+RUN PIP_NO_CACHE_DIR=0 pip install --upgrade pip setuptools wheel && \
+    pip install -r requirements-ui.txt
+
+# Copy UI source
+COPY ui /app/ui
+
+EXPOSE 8501
+
+# Default command provided by docker-compose
+CMD ["streamlit", "run", "ui/app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]

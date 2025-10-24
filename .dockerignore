@@ -1,0 +1,43 @@
+# Exclude version control
+.git
+.gitignore
+
+# Exclude Python cache/venv
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# OS/editor files
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Data/output
+data/
+**/*.log
+.cache/
+.python_cache/
+.mypy_cache/
+pytest_cache/
+
+# Node/Streamlit
+node_modules/
+ui/.streamlit/
+.streamlit/
+
+# Docker artifacts
+*.pid
+
+# Everything except essentials
+!app/
+!requirements.txt
+!requirements-ui.txt
+!Dockerfile.api
+!Dockerfile.ui
+!infra/
+!ui/
