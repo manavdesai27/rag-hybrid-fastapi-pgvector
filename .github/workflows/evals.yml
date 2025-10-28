@@ -2,17 +2,6 @@ name: RAG Evals (RAGAS CI Gate)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main, master ]
-    paths:
-      - "app/**"
-      - "infra/**"
-      - "ui/**"
-      - "requirements.txt"
-      - ".github/workflows/evals.yml"
-      - "data/evals/**"
-  pull_request:
-    branches: [ main, master ]
 
 jobs:
   evals:
@@ -37,10 +26,12 @@ jobs:
         run: |
           cp .env.example .env
           # Insert OPENAI_API_KEY from env (mapped from GitHub secret)
-          sed -i 's|OPENAI_API_KEY=sk-REPLACE_ME|OPENAI_API_KEY='"${OPENAI_API_KEY}"'|' .env
+          sed -i 's|^OPENAI_API_KEY=.*|OPENAI_API_KEY='"${OPENAI_API_KEY}"'|' .env
           # Ensure evals target API is localhost mapping from compose
-          echo "EVAL_API_BASE_URL=http://localhost:8000" >> .env
-          echo "MAX_DOCS=12" >> .env
+          sed -i 's|^EVAL_API_BASE_URL=.*|EVAL_API_BASE_URL=http://localhost:8000|' .env
+          sed -i 's|^MAX_DOCS=.*|MAX_DOCS=12|' .env || echo "MAX_DOCS=12" >> .env
+          echo "RUNNING_IN_DOCKER=1" >> .env
+          sed -i 's|^RERANKER_ENABLED=.*|RERANKER_ENABLED=true|' .env
 
       - name: Build and start stack
         if: env.OPENAI_API_KEY != ''
