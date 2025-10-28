@@ -28,7 +28,7 @@ jobs:
           # Insert OPENAI_API_KEY from env (mapped from GitHub secret)
           sed -i 's|^OPENAI_API_KEY=.*|OPENAI_API_KEY='"${OPENAI_API_KEY}"'|' .env
           # Ensure evals target API is localhost mapping from compose
-          sed -i 's|^EVAL_API_BASE_URL=.*|EVAL_API_BASE_URL=http://localhost:8000|' .env
+          sed -i 's|^EVAL_API_BASE_URL=.*|EVAL_API_BASE_URL=http://api:8000|' .env
           sed -i 's|^MAX_DOCS=.*|MAX_DOCS=12|' .env || echo "MAX_DOCS=12" >> .env
           echo "RUNNING_IN_DOCKER=1" >> .env
           sed -i 's|^RERANKER_ENABLED=.*|RERANKER_ENABLED=true|' .env
